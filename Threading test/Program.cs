@@ -12,11 +12,10 @@ namespace Threading_test
         }
         static void StartProgram()
         {        
-            DriveCar drive = new DriveCar();
-            DriveCar drive2 = new DriveCar();
+            DriveCar drive = new DriveCar();         
             Thread drivethread = new Thread(new ThreadStart(drive.BlueDrive));
             drivethread.Start();
-            drive2.RedDrivve();
+            drive.RedDrivve();
 
         }
     }

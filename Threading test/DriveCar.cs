@@ -1,31 +1,47 @@
 ﻿using Microsoft.VisualBasic;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
 namespace Threading_test
 {
-     public class DriveCar
+    public class DriveCar
     {
-        RedCar red = new RedCar("Red");
-        BlueCar blue = new BlueCar("Blue");
-       
+        RedCar red = new RedCar("The Red car");
+        BlueCar blue = new BlueCar("The Blue car");
+        int RedInt = 0;
+        int BlueInt = 0;
         public void RedDrivve()
         {
-            int redint = 0;
-            Console.WriteLine($"{red} is accelerating to {redint}");
+            CheckWin();
+            Console.WriteLine($"{red} has driven {RedInt} laps");
             Thread.Sleep(1000);
-            redint++;
+            RedInt++;
             RedDrivve();
         }
         public void BlueDrive()
         {
-            int blueint = 0;
-            Console.WriteLine($"{blue} accelerating to {blueint}");
-            Thread.Sleep(1500);
-            blueint++; 
+            CheckWin();
+            Console.WriteLine($"{blue} has driven {BlueInt} laps");
+            Thread.Sleep(1300);
+            BlueInt++;
             BlueDrive();
+        }
+        public void CheckWin()
+        {
+            if (RedInt == 5)
+            {
+                Console.WriteLine($"{red} won the race");
+                System.Environment.Exit(0);
+            }
+            else if (BlueInt == 5)
+            {
+                Console.WriteLine($"{blue} won the race");
+                System.Environment.Exit(0);
+                return;
+            }
         }
     }
 }
